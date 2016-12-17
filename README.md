@@ -4,4 +4,18 @@
 
 Packing Box App build with [React.js](https://facebook.github.io/react) + [MobX](https://mobxjs.github.io/mobx).
 
-![Demo View](https://raw.githubusercontent.com/IvanDimanov/FantasticBoxCo/master/demo.png)
+### [Live Demo](https://fantastic-box-co-nwvugrcgaq.now.sh)
+### [![Screen play](https://raw.githubusercontent.com/IvanDimanov/FantasticBoxCo/master/demo.png)](https://fantastic-box-co-nwvugrcgaq.now.sh)
+
+## Try it locally
+```
+git clone https://github.com/IvanDimanov/FantasticBoxCo.git
+cd FantasticBoxCo
+npm start
+```
+
+## Contribution
+All plugins are highly welcomed! Before committing, please do consider first running
+```
+npm test
+```
