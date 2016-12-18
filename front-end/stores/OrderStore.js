@@ -153,6 +153,12 @@ function OrderStore () {
         throw new TypeError(`Cardboard Grade must be one of "${validCardboardGrades.join('", "')}" not "${newCardboardGrade}"`)
       }
 
+      if (newCardboardGrade === 'C' &&
+          this.area > 2
+      ) {
+        throw new RangeError('Cardboard Grade "C" is available only for boxes with maximum Area of 2')
+      }
+
       action(() => (this.cardboardGrade = newCardboardGrade))()
     },
 
@@ -193,6 +199,12 @@ function OrderStore () {
         }
       })
 
+      if (~newExtras.indexOf('reinforced-bottom') &&
+          this.cardboardGrade !== 'A'
+      ) {
+        throw new ReferenceError('Extra "Reinforced bottom" is available only for Cardboard Grade "A"')
+      }
+
       action(() => (this.extras = newExtras.sort()))()
     },
 
@@ -203,6 +215,12 @@ function OrderStore () {
 
       if (!~validExtras.indexOf(newExtra)) {
         throw new RangeError(`Adding new Extra must be one of "${validExtras.join('", "')}" not "${newExtra}"`)
+      }
+
+      if (newExtra === 'reinforced-bottom' &&
+          this.cardboardGrade !== 'A'
+      ) {
+        throw new ReferenceError('Extra "Reinforced bottom" is available only for Cardboard Grade "A"')
       }
 
       action(() => this.extras.push(newExtra))()
@@ -256,3 +274,4 @@ function OrderStore () {
 }
 
 export default new OrderStore()
+export const OrderStoreConstructor = OrderStore

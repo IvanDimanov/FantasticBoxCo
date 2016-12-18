@@ -46,3 +46,4 @@ function StepStore () {
 }
 
 export default new StepStore()
+export const StepStoreConstructor = StepStore
