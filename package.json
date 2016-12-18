@@ -14,8 +14,10 @@
   "scripts": {
     "start": "npm run build && http-server -o",
     "start-dashboard": "cross-env NODE_ENV=local cross-env dashboard=true webpack-dashboard webpack-dev-server --content-base=./public --inline --progress --colors --hot",
+    "build": "npm i && webpack",
     "lint": "standard",
-    "build": "npm i && webpack"
+    "test": "npm run lint && npm run test-unit",
+    "test-unit": "mocha ./tests/unit/.setup.js ./tests/unit/**/*.test.js"
   },
   "engines": {
     "node": ">=7.0"
@@ -38,6 +40,12 @@
     "babel-loader": "6.2.7",
     "babel-preset-latest": "6.16.0",
     "babel-preset-react": "6.16.0",
+    "babel-register": "6.18.0",
+    "chai": "3.5.0",
+    "enzyme": "2.6.0",
+    "jsdom": "9.8.3",
+    "mocha": "3.2.0",
+    "react-addons-test-utils": "15.4.1",
     "standard": "8.5.0",
     "webpack": "1.13.3",
     "webpack-dashboard": "0.2.0",

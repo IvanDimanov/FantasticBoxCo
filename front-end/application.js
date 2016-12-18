@@ -6,8 +6,6 @@ import {render} from 'react-dom'
 import StepIndicator from './components/StepIndicator'
 import StepContent from './components/StepContent'
 
-import StepStore from './stores/StepStore'
-
 const Main = () => <div>
   <header>
     <h1 className={'logo'}>FantasticBoxCo</h1>
