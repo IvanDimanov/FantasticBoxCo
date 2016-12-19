@@ -83,6 +83,7 @@ class Step1 extends Component {
           step='0.01'
           value={width}
           onChange={(event) => this.setState({width: event.target.value * 1})}
+          autoFocus
         />
       </div>
 
