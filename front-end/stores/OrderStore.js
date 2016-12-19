@@ -253,12 +253,12 @@ function OrderStore () {
 
       /* Account for Cardboard grade */
       const cardboardGradePrice = this.cardboardGrade ? cardboardGradePrices[this.cardboardGrade].value : 0
-      price += this.quantity * this.area * cardboardGradePrice
+      price += this.quantity * this.area * 6 * cardboardGradePrice
 
       /* Account for Print Quality */
       if (this.printQuality !== 'FantasticBoxCo-branding') {
         const printPrice = this.printQuality ? printPrices[this.printQuality].value : 0
-        price += this.quantity * this.area * printPrice
+        price += this.quantity * this.area * 6 * printPrice
       }
 
       /* Account for Extras */
