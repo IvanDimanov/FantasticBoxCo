@@ -67,6 +67,17 @@ function OrderStore () {
   }
 
   extendObservable(this, {
+    /* Return the Store to its initial state by setting all default values */
+    init: () => action(() => {
+      this.width = 0
+      this.height = 0
+      this.length = 0
+      this.quantity = 0
+      this.cardboardGrade = ''
+      this.printQuality = ''
+      this.extras = []
+    }),
+
     /* Step 1 pops */
     width: 0,
     height: 0,

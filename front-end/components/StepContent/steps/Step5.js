@@ -3,6 +3,7 @@
 import React, {Component} from 'react'
 import {observer} from 'mobx-react'
 
+import StepStore from '../../../stores/StepStore'
 import OrderStore from '../../../stores/OrderStore'
 
 const Step5 = observer(class Step5 extends Component {
@@ -32,6 +33,19 @@ const Step5 = observer(class Step5 extends Component {
         <dt>Total Cost:</dt>
         <dd>&pound;{OrderStore.priceLabel}</dd>
       </dl>
+
+      <div className='form-actions'>
+        <button
+          type='button'
+          className='btn btn-back'
+          onClick={() => {
+            OrderStore.init()
+            StepStore.gotoStep(1)
+          }}
+        >
+          New Order
+        </button>
+      </div>
     </div>
   }
 })
