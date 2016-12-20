@@ -20,8 +20,8 @@ const Step = observer(class Step extends Component {
     return <li>
       <a
         className={classes.join(' ')}
-        onClick={() => number !== 5 && StepStore.gotoStep(number)}
-        style={number !== 5 ? {cursor: 'pointer'} : {}}
+        onClick={() =>StepStore.gotoStep(number)}
+        style={{cursor: 'pointer'}}
       >
         {number !== 5 && <div className={`${mainClassName}-number`}>{number}</div>}
         <h3 className={`${mainClassName}-heading`}>{heading}</h3>
