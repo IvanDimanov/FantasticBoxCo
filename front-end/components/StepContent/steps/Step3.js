@@ -17,31 +17,11 @@ const Step3 = observer(class Step3 extends Component {
 
       errors: []
     }
-
-    this.saveContent = this.saveContent.bind(this)
   }
 
   isContentValid () {
     const {printQuality} = this.state
     return Boolean(printQuality)
-  }
-
-  saveContent () {
-    const errors = []
-    const {printQuality} = this.state
-
-    try {
-      OrderStore.setPrintQuality(printQuality)
-    } catch (error) {
-      errors.push(error.message)
-    }
-
-    if (errors.length) {
-      this.setState({errors})
-      return
-    }
-
-    StepStore.nextStep()
   }
 
   render () {
@@ -63,7 +43,17 @@ const Step3 = observer(class Step3 extends Component {
               name='print-quality'
               value='3-colors'
               checked={printQuality === '3-colors'}
-              onChange={(event) => this.setState({printQuality: event.target.value})}
+              onChange={(event) => {
+                const {errors} = this.state
+                try {
+                  const printQuality = event.target.value
+                  this.setState({printQuality})
+                  OrderStore.setPrintQuality(printQuality)
+                } catch (error) {
+                  errors.push(error.message)
+                  this.setState({errors})
+                }
+              }}
             />
             <span className='btn btn-radio'>
               3 colours<br />&pound;{OrderStore.printPrices['3-colors'].label} m<sup>2</sup>
@@ -78,7 +68,17 @@ const Step3 = observer(class Step3 extends Component {
               name='print-quality'
               value='2-colors'
               checked={printQuality === '2-colors'}
-              onChange={(event) => this.setState({printQuality: event.target.value})}
+              onChange={(event) => {
+                const {errors} = this.state
+                try {
+                  const printQuality = event.target.value
+                  this.setState({printQuality})
+                  OrderStore.setPrintQuality(printQuality)
+                } catch (error) {
+                  errors.push(error.message)
+                  this.setState({errors})
+                }
+              }}
             />
             <span className='btn btn-radio'>
               2 colours<br />&pound;{OrderStore.printPrices['2-colors'].label} m<sup>2</sup>
@@ -93,7 +93,17 @@ const Step3 = observer(class Step3 extends Component {
               name='print-quality'
               value='black-only'
               checked={printQuality === 'black-only'}
-              onChange={(event) => this.setState({printQuality: event.target.value})}
+              onChange={(event) => {
+                const {errors} = this.state
+                try {
+                  const printQuality = event.target.value
+                  this.setState({printQuality})
+                  OrderStore.setPrintQuality(printQuality)
+                } catch (error) {
+                  errors.push(error.message)
+                  this.setState({errors})
+                }
+              }}
             />
             <span className='btn btn-radio'>
               Black only<br />&pound;{OrderStore.printPrices['black-only'].label} m<sup>2</sup>
@@ -108,7 +118,17 @@ const Step3 = observer(class Step3 extends Component {
               name='print-quality'
               value='no-printing'
               checked={printQuality === 'no-printing'}
-              onChange={(event) => this.setState({printQuality: event.target.value})}
+              onChange={(event) => {
+                const {errors} = this.state
+                try {
+                  const printQuality = event.target.value
+                  this.setState({printQuality})
+                  OrderStore.setPrintQuality(printQuality)
+                } catch (error) {
+                  errors.push(error.message)
+                  this.setState({errors})
+                }
+              }}
             />
             <span className='btn btn-radio'>
               No printing<br />&pound;{OrderStore.printPrices['no-printing'].label}
@@ -123,7 +143,17 @@ const Step3 = observer(class Step3 extends Component {
               name='print-quality'
               value='FantasticBoxCo-branding'
               checked={printQuality === 'FantasticBoxCo-branding'}
-              onChange={(event) => this.setState({printQuality: event.target.value})}
+              onChange={(event) => {
+                const {errors} = this.state
+                try {
+                  const printQuality = event.target.value
+                  this.setState({printQuality})
+                  OrderStore.setPrintQuality(printQuality)
+                } catch (error) {
+                  errors.push(error.message)
+                  this.setState({errors})
+                }
+              }}
             />
             <span className='btn btn-radio'>
               <strong>FantasticBoxCo</strong> branding<br />5% discount on total price
@@ -144,7 +174,7 @@ const Step3 = observer(class Step3 extends Component {
         <button
           type='button'
           className='btn btn-primary btn-next'
-          onClick={this.saveContent}
+          onClick={StepStore.nextStep}
           disabled={!this.isContentValid()}
         >
           Next

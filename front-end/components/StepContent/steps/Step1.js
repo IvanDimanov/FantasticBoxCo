@@ -19,49 +19,11 @@ class Step1 extends Component {
 
       errors: []
     }
-
-    this.saveContent = this.saveContent.bind(this)
   }
 
   isContentValid () {
     const {width, height, length, quantity} = this.state
     return Boolean(width * height * length * quantity)
-  }
-
-  saveContent () {
-    const errors = []
-    const {width, height, length, quantity} = this.state
-
-    try {
-      OrderStore.setWidth(width)
-    } catch (error) {
-      errors.push(error.message)
-    }
-
-    try {
-      OrderStore.setHeight(height)
-    } catch (error) {
-      errors.push(error.message)
-    }
-
-    try {
-      OrderStore.setLength(length)
-    } catch (error) {
-      errors.push(error.message)
-    }
-
-    try {
-      OrderStore.setQuantity(quantity)
-    } catch (error) {
-      errors.push(error.message)
-    }
-
-    if (errors.length) {
-      this.setState({errors})
-      return
-    }
-
-    StepStore.nextStep()
   }
 
   render () {
@@ -82,7 +44,17 @@ class Step1 extends Component {
           min='0'
           step='0.01'
           value={width}
-          onChange={(event) => this.setState({width: event.target.value * 1})}
+          onChange={(event) => {
+            const {errors} = this.state
+            try {
+              const width = event.target.value * 1
+              this.setState({width})
+              OrderStore.setWidth(width)
+            } catch (error) {
+              errors.push(error.message)
+            }
+            this.setState({errors})
+          }}
           autoFocus
         />
       </div>
@@ -95,7 +67,17 @@ class Step1 extends Component {
           min='0'
           step='0.01'
           value={height}
-          onChange={(event) => this.setState({height: event.target.value * 1})}
+          onChange={(event) => {
+            const {errors} = this.state
+            try {
+              const height = event.target.value * 1
+              this.setState({height})
+              OrderStore.setHeight(height)
+            } catch (error) {
+              errors.push(error.message)
+            }
+            this.setState({errors})
+          }}
         />
       </div>
 
@@ -107,7 +89,17 @@ class Step1 extends Component {
           min='0'
           step='0.01'
           value={length}
-          onChange={(event) => this.setState({length: event.target.value * 1})}
+          onChange={(event) => {
+            const {errors} = this.state
+            try {
+              const length = event.target.value * 1
+              this.setState({length})
+              OrderStore.setLength(length)
+            } catch (error) {
+              errors.push(error.message)
+            }
+            this.setState({errors})
+          }}
         />
       </div>
 
@@ -119,7 +111,17 @@ class Step1 extends Component {
           min='0'
           step='1'
           value={quantity}
-          onChange={(event) => this.setState({quantity: event.target.value * 1})}
+          onChange={(event) => {
+            const {errors} = this.state
+            try {
+              const quantity = event.target.value * 1
+              this.setState({quantity})
+              OrderStore.setQuantity(quantity)
+            } catch (error) {
+              errors.push(error.message)
+            }
+            this.setState({errors})
+          }}
         />
       </div>
 
@@ -127,7 +129,7 @@ class Step1 extends Component {
         <button
           type='button'
           className='btn btn-primary btn-next'
-          onClick={this.saveContent}
+          onClick={StepStore.nextStep}
           disabled={!this.isContentValid()}
         >
           Next

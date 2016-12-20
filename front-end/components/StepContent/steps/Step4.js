@@ -17,11 +17,10 @@ const Step4 = observer(class Step4 extends Component {
 
       errors: []
     }
-
-    this.saveContent = this.saveContent.bind(this)
   }
 
   onExtraChange (extra, isChecked) {
+    const errors = []
     const {extras} = this.state
 
     if (isChecked) {
@@ -32,11 +31,6 @@ const Step4 = observer(class Step4 extends Component {
     }
 
     this.setState({extras})
-  }
-
-  saveContent () {
-    const errors = []
-    const {extras} = this.state
 
     try {
       OrderStore.setExtras(extras)
@@ -48,8 +42,6 @@ const Step4 = observer(class Step4 extends Component {
       this.setState({errors})
       return
     }
-
-    StepStore.nextStep()
   }
 
   render () {
@@ -109,7 +101,7 @@ const Step4 = observer(class Step4 extends Component {
         <button
           type='button'
           className='btn btn-primary btn-next'
-          onClick={this.saveContent}
+          onClick={StepStore.nextStep}
         >
           Next
         </button>

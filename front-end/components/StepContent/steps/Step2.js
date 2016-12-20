@@ -17,31 +17,11 @@ const Step2 = observer(class Step2 extends Component {
 
       errors: []
     }
-
-    this.saveContent = this.saveContent.bind(this)
   }
 
   isContentValid () {
     const {cardboardGrade} = this.state
     return Boolean(cardboardGrade)
-  }
-
-  saveContent () {
-    const errors = []
-    const {cardboardGrade} = this.state
-
-    try {
-      OrderStore.setCardboardGrade(cardboardGrade)
-    } catch (error) {
-      errors.push(error.message)
-    }
-
-    if (errors.length) {
-      this.setState({errors})
-      return
-    }
-
-    StepStore.nextStep()
   }
 
   render () {
@@ -63,7 +43,17 @@ const Step2 = observer(class Step2 extends Component {
               name='cardboard-grade'
               value='A'
               checked={cardboardGrade === 'A'}
-              onChange={((event) => this.setState({cardboardGrade: event.target.value}))}
+              onChange={(event) => {
+                const {errors} = this.state
+                try {
+                  const cardboardGrade = event.target.value
+                  this.setState({cardboardGrade})
+                  OrderStore.setCardboardGrade(cardboardGrade)
+                } catch (error) {
+                  errors.push(error.message)
+                  this.setState({errors})
+                }
+              }}
             />
             <span className='btn btn-radio'>
               A Grade<br />&pound;{OrderStore.cardboardGradePrices.A.label} m<sup>2</sup>
@@ -78,7 +68,17 @@ const Step2 = observer(class Step2 extends Component {
               name='cardboard-grade'
               value='B'
               checked={cardboardGrade === 'B'}
-              onChange={((event) => this.setState({cardboardGrade: event.target.value}))}
+              onChange={(event) => {
+                const {errors} = this.state
+                try {
+                  const cardboardGrade = event.target.value
+                  this.setState({cardboardGrade})
+                  OrderStore.setCardboardGrade(cardboardGrade)
+                } catch (error) {
+                  errors.push(error.message)
+                  this.setState({errors})
+                }
+              }}
             />
             <span className='btn btn-radio'>
               B Grade<br />&pound;{OrderStore.cardboardGradePrices.B.label} m<sup>2</sup>
@@ -122,7 +122,7 @@ const Step2 = observer(class Step2 extends Component {
         <button
           type='button'
           className='btn btn-primary btn-next'
-          onClick={this.saveContent}
+          onClick={StepStore.nextStep}
           disabled={!this.isContentValid()}
         >
           Next
